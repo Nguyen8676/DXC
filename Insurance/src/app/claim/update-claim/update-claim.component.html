@@ -1,0 +1,73 @@
+<p *ngIf="alertMS && policyMS" >
+  <ngb-alert [dismissible]="false">
+    <strong>Warning!</strong> {{messagePolicyNotExist}}
+  </ngb-alert>
+</p>
+<p *ngIf="alertMS && dateMS" >
+  <ngb-alert [dismissible]="false">
+    <strong>Warning!</strong> {{messageDateInfuture}}
+  </ngb-alert>
+</p>
+<p *ngIf="alertMS && forceMS" >
+  <ngb-alert [dismissible]="false">
+    <strong>Warning!</strong> {{messagePolicyForce}}
+  </ngb-alert>
+</p>
+<p *ngIf="alertMS && reserveMS" >
+  <ngb-alert [dismissible]="false">
+    <strong>Warning!</strong> {{messageNegative}}
+  </ngb-alert>
+</p>
+<p *ngIf="alertMS && insuredMS" >
+  <ngb-alert [dismissible]="false">
+    <strong>Warning!</strong> {{messageCompareInsured}}
+  </ngb-alert>
+</p>
+<div  style="width: 400px;">
+  <form (ngSubmit)="onSubmit()">
+    <div  class="form-group">
+      <label for="name">Policy No</label>
+      <input #All #PolicyNo required [(ngModel)]="claim.policyNo" type="text" class="form-control" id="firstName" required  name="PolicyNo">
+      <p *ngIf="policyNullMS" style="background-color: red;">
+        <strong>Warning!</strong> {{messagePolicyNotExist}}
+      </p>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Date Occurred</label>
+      <form class="form-inline">
+        <div class="form-group">
+          <div  class="input-group">
+            <input #All #date  class="form-control"  type="date" [(ngModel)]="claim.dateOccurred" [ngModelOptions]="{standalone: true}" [value]="claim.dateOccurred | date:'yyyy-MM-dd'"
+                   name="date" required  >
+          </div>
+        </div>
+      </form>
+      <p *ngIf="datenullMS" style="background-color: red;">
+        <strong>Warning!</strong> {{messagePolicyNotExist}}
+      </p>
+    </div>
+
+    <div  class="form-group">
+      <label for="name">Reserve Currency</label>
+      <select #All #reserveCurrency name="reserveCurrency" class="form-control" required [(ngModel)]="claim.reserveCurrency" [ngModelOptions]="{standalone: true}">
+        <ng-container *ngFor="let option of foods">
+          <option [ngValue]="option.value">{{option.viewValue}}</option>
+        </ng-container>
+      </select>
+      <p *ngIf="reserveCurrencyNullMS" style="background-color: red;">
+        <strong>Warning!</strong> {{messagePolicyNotExist}}
+      </p>
+    </div>
+
+    <div  class="form-group">
+      <label for="name">Reserve Amount</label>
+      <input  #reserveAmount  required [(ngModel)]="claim.reserveAmount" [ngModelOptions]="{standalone: true}" type="number" class="form-control" id="emailId" required  name="reserveAmount">
+      <p *ngIf="reserveAmountNullMS" style="background-color: red;">
+        <strong>Warning!</strong> {{messagePolicyNotExist}}
+      </p>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update</button>
+  </form>
+</div>

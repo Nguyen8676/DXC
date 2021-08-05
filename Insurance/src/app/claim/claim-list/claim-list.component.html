@@ -1,0 +1,41 @@
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.dataTables.min.js" type="text/javascript"></script>
+<div *ngFor="let image of images">
+  <a href="#"><img class="img-fluid img-thumbnail" [src]="image" style="height:auto;width:fit-content ;border: white"></a>
+</div>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2></h2>
+  </div>
+  <div class="panel-body">
+    <table id="example" class="table table-striped">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Claim No</th>
+          <th>Policy No</th>
+          <th>Date Occurred</th>
+          <th>Reserve Currency</th>
+          <th>Reserve Amount</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let claim of listClaim; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{claim.claimNo}}</td>
+          <td>{{claim.motor.policyNo}}</td>
+          <td>{{claim.dateOccurred}}</td>
+          <td>{{claim.reserveCurrency}}</td>
+          <td>{{claim.reserveAmount}}</td>
+          <td>{{claim.status}}</td>
+          <td><button *ngIf="claim.status==='Pending'" (click)='activeClaim(i)' class="btn btn-danger" >Active</button>
+              <button *ngIf="claim.status==='Pending'" #buttonUpdate (click)='getClaimByClaimNo(i)' class="btn btn-info" style="margin-left: 10px">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <span>Copyright © 2021 DXC Technology</span>
+</div>
